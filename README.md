@@ -27,8 +27,27 @@ netstat –n  #所有已建立的有效连接
 查看所有的UDP   netstat -aunp  
 
 **意外的发现，我的Mysql 3306 竟然是对外网开放的**  
+ 
+ 
+
+查看我当前的mysql 用的是哪个配置
+
+  ```  
+  mysql --help | grep my.cnf
+
+  vi /etc/my.cnf
+  [mysqld]
+   bind-address    = 127.0.0.1
+  ```   
 
 
 ### 我想知道每个目录下的空间使用情况   
+
+
   du -h -d 1   
+
+
+
+
+
 
