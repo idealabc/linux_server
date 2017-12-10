@@ -46,6 +46,13 @@ netstat –n  #所有已建立的有效连接
 
   du -h -d 1   
 
+### 我想看看有多少IP探测了我服务器的ssh
+
+```
+grep -i 'invalid' /var/log/auth.log | grep -v 'Failed' | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' >tmp.log
+
+awk '{print $10}' tmp.log |sort|uniq -c|sort -nr |head -100
+```
 
 
 
