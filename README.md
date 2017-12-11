@@ -218,7 +218,92 @@ chmod +x /etc/network/if-pre-up.d/iptables #添加执行权限
 iptables -L -n #查看规则是否生效.
 
 
+# 给网站配置https
 
+其本上是按这个配置的，(https://coolshell.cn/articles/18094.html)[https://coolshell.cn/articles/18094.html]
+
+1）首先，打开 https://certbot.eff.org 网页。
+
+2）在那个机器上图标下面，你需要选择一下你用的 Web 接入软件 和你的 操作系统。比如，我选的，nginx 和 Ubuntu 14.04
+
+3）然后就会跳转到一个安装教程网页。你就照着做一遍就好了。
+
+```
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-nginx
+sudo certbot --nginx
+
+```
+
+安装好之后
+
+```
+sudo certbot --nginx
+
+```
+Certbot 会自动帮你注册账户，检测 Nginx 配置文件中的域名，询问你为哪些域名生成证书，是否将 Http 重定向到 Https 等等
+
+修改后 web服务器配置，我的是nginx
+
+```
+        server {
+                listen       443 ssl;
+                server_name  server_Name;
+
+				ssl_certificate      /etc/letsencrypt/live/sitename/fullchain.pem;
+				ssl_certificate_key  /etc/letsencrypt/live/sitename/privkey.pem;
+				ssl_trusted_certificate /etc/letsencrypt/live/sitename/chain.pem;
+                ssl_session_cache    shared:SSL:1m;
+                ssl_session_timeout  5m;
+
+                ssl_ciphers  HIGH:!aNULL:!MD5;
+                ssl_prefer_server_ciphers  on;
+
+                location / {
+                        root   html;
+                        index  index.html index.htm;
+                }
+               }
+                
+ ```
+ 
+ 在http的server 里加一下重定向,把http映射到https
+ 
+ ```
+ rewrite ^(.*)$  https://$host$1 permanent;
+ 
+ ```
+ 
+
+ 我的服务器上绑了多个域名
+ 
+ ```
+
+ sudo certbot certonly --webroot -w /usr/local/openresty/nginx/html/ -d domain.com -d domain.cn -d xxx.com -d xxx.cn
+ 
+ ```
+ 
+ 
+ 证书只有三个月的有限期
+ 
+ ```
+ sudo certbot renew --dry-run
+ 
+ ```
+ 
+ 更新证书,或者创建定时任务
+ 
+ **最后注意一定要重启nginx**
+ 
+ ```
+nginx -s reload
+
+ ```
+ 
+ 
 
 
 
