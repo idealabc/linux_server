@@ -144,8 +144,49 @@ ssh username@ip -p 2022
 
 ```
 
+### 我想分析一下我的web 访问日志 access.log
+
+找到一个非常棒的公具[webalizer](http://www.webalizer.org/)
+webalizer是一个高效的、免费的、开源的web服务器日志分析工具。 它产生非常详细的，易于配置使用HTML格式的报告，通过标准的Web浏览器查看。
+
+安装
+
+```
+# 依赖  libgd、libpng等库,我的机器上没安装libgd
+
+#libgd
+wget https://github.com/libgd/libgd/releases/download/gd-2.2.5/libgd-2.2.5.tar.gz
+tar -zxvf libgd-2.2.5.tar.gz 
+libgd-2.2.5/ 
+./configure
+make
+make install
+
+#webalizer
+wget ftp://ftp.mrunix.net/pub/webalizer/webalizer-2.23-05-src.tgz
+tar xzf webalizer-2.23-05-src.tgz
+cd webalizer-2.23-05-src
+./configure --prefix=/home/user/webalizer
+make
+make install
 
 
+#安装成功，开始分析
+
+webalizer -o outDir access_log
+
+```
+webalizer 的一些使用示例
+
+```
+
+#想看指定IP或IP段
+webalizer -o outDir --ip xxx.xxx.xxx.xxx access_log
+webalizer -o outDir  --ip xxx.xx access_log
+#想看指定时间段的
+webalizer -o outDir --start 06:00:00 --end 07:00:00 access_log
+
+```
 
 
 
