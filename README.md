@@ -197,7 +197,28 @@ webalizer -o outDir --start 06:00:00 --end 07:00:00 access_log
 把 NTP 服务器升级到 4.2.7p26
 关闭现在 NTP 服务的 monlist 功能，在ntp.conf配置文件中增加`disable monitor`选项
 在网络出口封禁 UDP 123 端口
+ 
 
-* 初步想法，我的是阿里云服务器，还可以通过iptable限制，只通过阿里云的时间服务器同步时间
+# 配置ubuntu下的iptables  
+
+具体配置在iptables.sh, 注意 ssh 端口我改成2022 了
+
+
+iptables-save > /etc/iptables.rules  #保存当前的iptables 规则
+iptables-restore < /etc/iptables.rules #使防火墙规则生效
+
+# 使防火墙开机启动
+vi /etc/network/if-pre-up.d/iptables 
+```
+#!/bin/bash
+iptables-restore < /etc/iptables.rules
+```
+
+chmod +x /etc/network/if-pre-up.d/iptables #添加执行权限
+iptables -L -n #查看规则是否生效.
+
+
+
+
 
 
