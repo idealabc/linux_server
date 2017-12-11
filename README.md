@@ -207,7 +207,7 @@ webalizer -o outDir --start 06:00:00 --end 07:00:00 access_log
 iptables-save > /etc/iptables.rules  #保存当前的iptables 规则
 iptables-restore < /etc/iptables.rules #使防火墙规则生效
 
-# 使防火墙开机启动
+# iptables开机启动
 vi /etc/network/if-pre-up.d/iptables 
 ```
 #!/bin/bash
