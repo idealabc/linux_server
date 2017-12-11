@@ -3,7 +3,7 @@
 把配置和修改，监控等内容整理记录一下
 
 
-### 我想知道我的服务器都监听哪些端口
+# 我想知道我的服务器都监听哪些端口
 
 netstat查看正在监听的端口  
 -l表示监听  
@@ -42,12 +42,12 @@ netstat -aunp   #查看所有的UDP
   ```   
 
 
-### 我想知道每个目录下的空间使用情况   
+# 我想知道每个目录下的空间使用情况   
 
 
   du -h -d 1   
 
-### 我想看看有多少IP探测了我服务器的ssh
+# 我想看看有多少IP探测了我服务器的ssh
 
 ```
 grep -i 'invalid' /var/log/auth.log | grep -v 'Failed' | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' >tmp.log
@@ -55,7 +55,7 @@ grep -i 'invalid' /var/log/auth.log | grep -v 'Failed' | grep '[0-9]\{1,3\}\.[0-
 awk '{print $10}' tmp.log |sort|uniq -c|sort -nr |head -100
 ```
 
-### ssh 改用证书登录
+# ssh 改用证书登录
 
 * 看了一下auth.log日志，扫ssh 22端口的人还真多，
 
@@ -144,7 +144,7 @@ ssh username@ip -p 2022
 
 ```
 
-### 我想分析一下我的web 访问日志 access.log
+# 我想分析一下我的web 访问日志 access.log
 
 找到一个非常棒的公具[webalizer](http://www.webalizer.org/)
 webalizer是一个高效的、免费的、开源的web服务器日志分析工具。 它产生非常详细的，易于配置使用HTML格式的报告，通过标准的Web浏览器查看。
