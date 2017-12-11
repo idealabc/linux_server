@@ -220,7 +220,7 @@ iptables -L -n #查看规则是否生效.
 
 # 给网站配置https
 
-其本上是按这个配置的，(https://coolshell.cn/articles/18094.html)[https://coolshell.cn/articles/18094.html]
+其本上是按这个配置的，[如何免费的让网站启用HTTPS](https://coolshell.cn/articles/18094.html)
 
 1）首先，打开 https://certbot.eff.org 网页。
 
