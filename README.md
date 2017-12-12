@@ -341,4 +341,14 @@ cat /etc/letsencrypt/live/static.domain.com/fullchain.pem
 
 ```
 
+注意事项：
+* 关闭iptables
+* 生成的静态域名一定要解析到服务器上，可验证，不能先cname到cdn
+* 关闭nginx certbot 会启动验证  验证有三个选项，我选的是3
+* 验证要求输入的域名必须和 static.domain.com一致
+* 搞定这些，把privkey.pem中私钥的内容，放到阿里云cdn中 https的配置里
+* fullchain.pem 中的内容放到公钥里
+
+
+
 
