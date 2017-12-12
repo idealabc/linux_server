@@ -298,7 +298,7 @@ Certbot 会自动帮你注册账户，检测 Nginx 配置文件中的域名，�
  ```
 nginx -s reload
 
- ```
+ ``` 
  
  # 域名DNS的TTL 时间设置
  
@@ -328,4 +328,17 @@ nginx -s reload
 
 # 协议省略 
 为了方便在http和https之前切换，html中的所有url 只使用// 省去协议这块，也有利于浏览器缓存，这种方式，浏览器会自动加上协议
+
+# 配置HTTPS
+
+```
+nginx -s stop #
+certbot certonly --cert-name  static.domain.com #为cdn静态域名单独生成证书
+
+cat /etc/letsencrypt/live/static.domain.com/privkey.pem  
+
+cat /etc/letsencrypt/live/static.domain.com/fullchain.pem
+
+```
+
 
