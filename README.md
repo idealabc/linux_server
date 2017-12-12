@@ -329,7 +329,7 @@ nginx -s reload
 # 协议省略 
 为了方便在http和https之前切换，html中的所有url 只使用// 省去协议这块，也有利于浏览器缓存，这种方式，浏览器会自动加上协议
 
-# 配置HTTPS
+# 配置阿里云cdn 的HTTPS
 
 ```
 nginx -s stop #
