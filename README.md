@@ -304,4 +304,25 @@ nginx -s reload
  
  TTL时间，是DNS在解析节点的缓存时间，一般不会更换IP，我设置为一天过期。
 
+# 压测一下
+
+我用 [wetest](http://wetest.qq.com/) 腾讯的服务对服务器做了一下压测，发现一个300K的js，还真是出错率极高，
+解决办法是，购买阿里云的cdn,120元500G，我没测阿里云的oss 网络性能怎么样
+
+
+# 阿里云的cdn配置
+
+这个还真有必要记一下，买了服务，我还真是动用了百度才找到下面两个地址
+
+[阿里云cdn控制台](https://cdn.console.aliyun.com/)  这个是cdn控制台的地址
+
+[阿里云cdn配置说明](https://help.aliyun.com/document_detail/27112.html) cdn的配置在这里
+
+步骤：
+
+1. 在cdn控制台创建一个需要使用cdn的域名，比如 static.domain.com, 通过审核会生成一个 cname 域名
+2. 在自己的域名解析里，创建一条cname 记录，指向 cname域名，比如 static.domain.com.w.kunlunar.com
+3. 把需要使用cdn的静态文件，指到 static.domain.com 下，就大功告成了
+
+再次用wetest 做了一下压测，效果果然不一样了，不过，都用cdn了，服务器的压力自然小了
 
