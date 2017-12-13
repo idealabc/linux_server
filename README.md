@@ -278,11 +278,10 @@ Certbot 会自动帮你注册账户，检测 Nginx 配置文件中的域名，�
  ```
  
 
- 我的服务器上绑了多个域名
- 
+ 我的服务器上绑了多个域名, domain.com 是主域名，www.domain.com做首页 static.domain.com 指 向cdn做静态内容
  ```
 
- sudo certbot certonly --webroot -w /usr/local/openresty/nginx/html/ -d domain.com -d domain.cn -d xxx.com -d xxx.cn
+ sudo certbot certonly --webroot -w /usr/local/openresty/nginx/html/ -d domain.com -d www.domain.com -d static.domain.com
  
  ```
  
@@ -322,7 +321,7 @@ nginx -s reload
 
 1. 在cdn控制台创建一个需要使用cdn的域名，比如 static.domain.com, 通过审核会生成一个 cname 域名
 2. 在自己的域名解析里，创建一条cname 记录，指向 cname域名，比如 static.domain.com.w.kunlunar.com
-3. 把需要使用cdn的静态文件，指到 static.domain.com 下，就大功告成了
+3. 把需要使用cdn的静态文件，指到 static.domain.com 下
 
 再次用wetest 做了一下压测，效果果然不一样了，不过，都用cdn了，服务器的压力自然小了
 
@@ -332,18 +331,15 @@ nginx -s reload
 # 配置阿里云cdn 的HTTPS
 
 ```
-nginx -s stop #
-certbot certonly --cert-name  static.domain.com #为cdn静态域名单独生成证书
+cat /etc/letsencrypt/live/static.domain.com/privkey.pem  #这个是放在阿里云cdn上的私钥
 
-cat /etc/letsencrypt/live/static.domain.com/privkey.pem  
-
-cat /etc/letsencrypt/live/static.domain.com/fullchain.pem
+cat /etc/letsencrypt/live/static.domain.com/fullchain.pem #这个是放在阿里云cdn上的公钥
 
 ```
 
 注意事项：
-* 关闭iptables
-* 生成的静态域名一定要解析到服务器上，可验证，不能先cname到cdn
+
+* 静态域名一定要解析到服务器上，可验证，不能先cname到cdn
 * 关闭nginx certbot 会启动验证  验证有三个选项，我选的是3
 * 验证要求输入的域名必须和 static.domain.com一致
 * 搞定这些，把privkey.pem中私钥的内容，放到阿里云cdn中 https的配置里
