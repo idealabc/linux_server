@@ -345,6 +345,16 @@ cat /etc/letsencrypt/live/static.domain.com/fullchain.pem #这个是放在阿里
 * 搞定这些，把privkey.pem中私钥的内容，放到阿里云cdn中 https的配置里
 * fullchain.pem 中的内容放到公钥里
 
+# 检测 服务器是否被入侵
+
+```
+chkrootkit
+
+aliens asp bindshell lkm rexedcs sniffer w55808 wted scalper slapper z2 chkutmp OSX_RSPLUG amd basename biff chfn chsh cron crontab date du dirname echo egrep env find fingerd gpm grep hdparm su ifconfig inetd inetdconf identd init killall  ldsopreload login ls lsof mail mingetty netstat named passwd pidof pop2 pop3 ps pstree rpcinfo rlogind rshd slogin sendmail sshd syslogd tar tcpd tcpdump top telnetd timed traceroute vdir w write
+
+```
+
+全是not no 不错！
 
 
 
