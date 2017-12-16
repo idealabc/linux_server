@@ -137,6 +137,17 @@ IdentityFile ~/.ssh/id_rsa
 IdentityFile ~/.ssh/s1
    
 ```
+或者
+
+```
+ssh-add ~/.ssh/private_key  #把你的私钥加入到ssh-agent中去
+
+#ssh-add -D 删除所有管理的密钥
+#ssh-add -d 删除指定的
+#ssh-add -l 查看现在增加进去的指纹信息
+#ssh-add -L 查看现在增加进去的私钥
+
+```
 9. 体验一下不用输入密码的感觉吧
 
 ```
